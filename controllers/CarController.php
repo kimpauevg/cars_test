@@ -47,7 +47,9 @@ class CarController extends Controller
         //return $this->render('index');
 
        if ($req->getIsGet()){
+
             $id = $req->getQueryParam('id');
+            if ($id == null) return $this->render('index',['json' => "Дайте Id"]);
             $json = $this->get($id);
             $this->layout = false;
            Yii::$app->response->format = Response::FORMAT_JSON;
@@ -109,14 +111,15 @@ class CarController extends Controller
 
 
     }
+
     public function actionCreate(){
-        $model = new Car();
+        $name = null;
         if (Yii::$app->request->post()){
-            $model->load(Yii::$app->request->post());
-            $res = $this->postpgsql($model->name);
+            $name = (Yii::$app->request->post('name'));
+            $res = $this->postpgsql($name);
             return $this->renderContent($res);
         }
-        return $this->render('create',['model'=>$model]);
+        return $this->render('clearcr',['name'=>$name]);
 
 
     }

@@ -1,11 +1,9 @@
 <?php
 
-
-use yii\bootstrap\ActiveForm;
-use yii\helpers\Html; ?>
-
-<?php $form = ActiveForm::begin();?>
-
-<?= $form->field($model, 'name')->textInput() ?>
-<?= Html::submitButton('Create car!', ['class' => 'btn btn-primary', 'name' => 'create car']) ?>
-<?php ActiveForm::end(); ?>
+use yii\helpers\Html;
+?>
+<?= Html::tag('p','Отправит запрос на /car')?>
+<?= Html::beginForm('/car')?>
+<?= Html::input('text','name')?>
+<?=Html::input('submit','Create car!')?>
+<?= Html::endForm()?>

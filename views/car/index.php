@@ -13,7 +13,9 @@ use yii\web\View;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        This is the Car page. You may modify the following file to customize its content:
+        Если вы видите "Дайте id", то, скорее всего, не дали в GET id, а если "success", то это был post запрос:
+        <?= $json?>
+
     </p>
 
     <code><?= __FILE__ ?></code>
