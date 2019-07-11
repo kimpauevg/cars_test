@@ -51,14 +51,15 @@ class CarController extends Controller
             $id = $req->getQueryParam('id');
             if ($id == null) return $this->render('index',['json' => "Дайте Id"]);
             $json = $this->get($id);
+            if ($json == null) return $this->renderContent('Нет такой машины');
             $this->layout = false;
-           Yii::$app->response->format = Response::FORMAT_JSON;
+            Yii::$app->response->format = Response::FORMAT_JSON;
             return $this->renderContent($json);
             //return $this->render('index',['json'=>$json]);
         }
         if ($req->getIsPost()) {
-            $this->postpgsql($req->post('name'));
-            return $this->render('index',['json'=> "success"]);
+            $ans = $this->postpgsql($req->post('name'));
+            return $this->render('index',['json'=> $ans]);
         }
         return $this->render('index');
 
@@ -87,7 +88,7 @@ class CarController extends Controller
     }
     public function get($id){
         $car = Car::findOne($id);
-        if ($car==null) { echo ("Нет такой машины"); return;}
+        if ($car==null) { return ("Нет такой машины"); }
         $body = $car->getBodies()->one();
         $trans = $car->getTransmissions()->one();
         $eng = $car->getEngines()->one();
@@ -119,7 +120,7 @@ class CarController extends Controller
             $res = $this->postpgsql($name);
             return $this->renderContent($res);
         }
-        return $this->render('clearcr',['name'=>$name]);
+        return $this->render('create',['name'=>$name]);
 
 
     }
