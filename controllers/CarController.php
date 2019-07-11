@@ -109,6 +109,17 @@ class CarController extends Controller
 
 
     }
+    public function actionCreate(){
+        $model = new Car();
+        if (Yii::$app->request->post()){
+            $model->load(Yii::$app->request->post());
+            $res = $this->postpgsql($model->name);
+            return $this->renderContent($res);
+        }
+        return $this->render('create',['model'=>$model]);
+
+
+    }
 
 
 }
