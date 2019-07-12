@@ -55,7 +55,6 @@ class CarController extends Controller
             $this->layout = false;
             Yii::$app->response->format = Response::FORMAT_JSON;
             return $this->renderContent($json);
-            //return $this->render('index',['json'=>$json]);
         }
         if ($req->getIsPost()) {
             $ans = $this->postpgsql($req->post('name'));
@@ -108,18 +107,13 @@ class CarController extends Controller
                 "3"=>$wheels[3]->hp,
             ]
         );
-        return json_encode($json, JSON_FORCE_OBJECT);
+        return $json;
 
 
     }
 
     public function actionCreate(){
         $name = null;
-        if (Yii::$app->request->post()){
-            $name = (Yii::$app->request->post('name'));
-            $res = $this->postpgsql($name);
-            return $this->renderContent($res);
-        }
         return $this->render('create',['name'=>$name]);
 
 
