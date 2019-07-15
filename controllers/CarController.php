@@ -67,23 +67,12 @@ class CarController extends Controller
 
     public function postpgsql($name){
         try {
-            Yii::$app->db->createCommand("INSERT INTO {{%Car}} (name) VALUES ('{$name}')")->execute();
+            Yii::$app->db->createCommand("INSERT INTO {{%car}} (name) VALUES ('{$name}')")->execute();
         } catch ( \Exception $exception){
             return $exception->getMessage();
         }
-        $car = Yii::$app->db->createCommand("SELECT * FROM {{%Car}} ORDER BY id DESC")->queryOne();//Извлечение последней записи
-
-        foreach ($car as $item){
-            if ($item!=0 && is_numeric($item)) {
-                $car = $item;
-                break;
-            }
-        }
-        Yii::$app->db->createCommand("INSERT INTO {{%Body}} (car_id) VALUES ($car)")->execute();
-        Yii::$app->db->createCommand("INSERT INTO {{%Engine}} (car_id) VALUES ($car)")->execute();
-        Yii::$app->db->createCommand("INSERT INTO {{%Transmission}} (car_id) VALUES ($car)")->execute();
-        for ($i=0;$i<4;$i++) Yii::$app->db->createCommand("INSERT INTO {{%Wheel}} (car_id) VALUES ($car)")->execute();
-        return "Response:Ok";
+        $car = Car::find()->where(['name'=> $name])->one();
+        return "Response:Ok, id = ".$car->id;
     }
     public function get($id){
         $car = Car::findOne($id);
@@ -92,7 +81,6 @@ class CarController extends Controller
         $trans = $car->getTransmissions()->one();
         $eng = $car->getEngines()->one();
         $wheels = $car->getWheels()->all();
-        if($body==null || $trans==null||$eng==null||$wheels==null) {echo 'Машине не хватает деталей'; return;}
 
 
         $json = array(

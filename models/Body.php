@@ -20,7 +20,7 @@ class Body extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Body';
+        return 'body';
     }
 
     /**

@@ -20,7 +20,7 @@ class Wheel extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Wheel';
+        return 'wheel';
     }
 
     /**

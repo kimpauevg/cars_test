@@ -20,7 +20,7 @@ class Engine extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Engine';
+        return 'engine';
     }
 
     /**

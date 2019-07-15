@@ -20,7 +20,7 @@ class Transmission extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Transmission';
+        return 'transmission';
     }
 
     /**

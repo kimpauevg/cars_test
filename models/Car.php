@@ -23,7 +23,7 @@ class Car extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Car';
+        return 'car';
     }
 
     /**

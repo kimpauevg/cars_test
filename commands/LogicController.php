@@ -82,19 +82,8 @@ class LogicController extends Controller
 
 
     public function actionPostpgsql($name){
-        Yii::$app->db->createCommand("INSERT INTO {{%Car}} (name) VALUES ('{$name}')")->execute();
-        $car = Yii::$app->db->createCommand("SELECT * FROM {{%Car}} ORDER BY id DESC")->queryOne();//Извлечение последней записи
+        Yii::$app->db->createCommand("INSERT INTO {{car}} (name) VALUES ('{$name}')")->execute();
 
-        foreach ($car as $item){
-            if ($item!=0 && is_numeric($item)) {
-                $car = $item;
-                break;
-            }
-        }
-        Yii::$app->db->createCommand("INSERT INTO {{%Body}} (car_id) VALUES ($car)")->execute();
-        Yii::$app->db->createCommand("INSERT INTO {{%Engine}} (car_id) VALUES ($car)")->execute();
-        Yii::$app->db->createCommand("INSERT INTO {{%Transmission}} (car_id) VALUES ($car)")->execute();
-        for ($i=0;$i<4;$i++) Yii::$app->db->createCommand("INSERT INTO {{%Wheel}} (car_id) VALUES ($car)")->execute();
 
     }
     public function actionResetpkeys(){

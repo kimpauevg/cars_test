@@ -26,8 +26,10 @@ class RacingController extends Controller
             foreach ([$eng, $bod, $tra] as $item) {
                 $hp = $item->hp;
                 $hp = $hp - rand(5, 15);
-                if ($hp <= 0) $hp = 0;
-                else $isalive = true;
+                if ($hp <= 0)
+                    $hp = 0;
+                else
+                    $isalive = true;
                 $item->hp = $hp;
             }
 

@@ -8,10 +8,10 @@ use yii\db\Migration;
 class m190710_150658_add_foreign_keys extends Migration
 {
     public function up(){
-        $this->addForeignKey('car_id_fk','{{%Body}}','car_id','{{%Car}}','id');
-        $this->addForeignKey('car_id_fk','{{%Wheel}}','car_id','{{%Car}}','id');
-        $this->addForeignKey('car_id_fk','{{%Engine}}','car_id','{{%Car}}','id');
-        $this->addForeignKey('car_id_fk','{{%Transmission}}','car_id','{{%Car}}','id');
+        $this->addForeignKey('car_id_fk','{{%body}}','car_id','{{%car}}','id');
+        $this->addForeignKey('car_id_fk','{{%wheel}}','car_id','{{%car}}','id');
+        $this->addForeignKey('car_id_fk','{{%engine}}','car_id','{{%car}}','id');
+        $this->addForeignKey('car_id_fk','{{%transmission}}','car_id','{{%car}}','id');
 
 
     }
